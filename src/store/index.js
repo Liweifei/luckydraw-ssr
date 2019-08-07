@@ -1,27 +1,46 @@
 import Vuex from "vuex"
 import Vue from "vue"
-
+// import axios from "../tools/axiosTool"
 Vue.use(Vuex);
 
-const createStore=function(){
-    let userInfo={
-        state:{
-            userName:"lwf"
+const createStore = function () {
+    let userInfo = {
+        state: {
+            userName: "lwf",
+            // tableData: []
         },
-        mutations:{
-            setInfo(state,name){
-                state.userName=name
-            }
+        mutations: {
+            setInfo(state, token) {
+                state.usertoken = token
+                axios.defaults.headers.common["Authorization"] = token;
+            },
+            // getList(state) {
+            //     //获取饭店列表
+            //     console.log("token是"+axios.defaults.headers.common["Authorization"]+"-----")
+            //     axios
+            //         .get("/restaurant/list")
+            //         .then(function (response) {
+            //             console.log(response.data.data)
+            //             state.tableData = response.data.data;
+            //         })
+            //         .catch(function (error) {
+            //             console.log(error);
+            //         });
+            // }
         },
-        actions:{
-            setInfo({commit},name){
-                commit("setInfo",name)
-            }
+        actions: {
+            setInfo({ commit }, token) {
+                console.log('token是' + token)
+                commit("setInfo", token)
+            },
+            // getList({ commit }) {
+            //     commit("getList")
+            // }
         }
     }
     return new Vuex.Store({
-        modules:{
-            userInfo:userInfo
+        modules: {
+            userInfo: userInfo
         }
     })
 }

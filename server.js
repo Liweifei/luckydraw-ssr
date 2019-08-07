@@ -25,7 +25,7 @@ function createRender(bundle,manifest){//获取server-render的实例
 let renderer;
 const isPro=process.env.NODE_ENV=="production";
 if(isPro){
-  renderer=createRender(require("./dist/vue-ssr-server-bundle.json"),require("./vue-ssr-client-manifest.json"))
+  renderer=createRender(require("./dist/vue-ssr-server-bundle.json"),require("./dist/vue-ssr-client-manifest.json"))
 }else{
   require("./build/setup-dev-server")(server,(bundle,clientmanifest)=>{
     renderer=createRender(bundle,clientmanifest)
@@ -40,9 +40,12 @@ function renderToString(context) {
 }
 
 server.get("*",(request,response)=>{
+  response.setHeader("Content-Type", "text/html")
   if(!renderer){
     return response.end('正在构建中...')
   }
+  // console.log("request.url是-----------"+request.url);
+  
   renderToString({ url: request.url }).then(html => {
     response.send(html)
   })
