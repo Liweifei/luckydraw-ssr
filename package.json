@@ -5,7 +5,7 @@
   "author": "Liweifei <1195669615@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "node server",
+    "dev": "rimraf dist && cross-env NODE_ENV=developement node server",
     "production": "cross-env NODE_ENV=production node server",
     "build": "rimraf dist && npm run buildServer && npm run buildClient",
     "buildClient": "cross-env NODE_ENV=production webpack --config build/ssr-client-config.js --progress --color",

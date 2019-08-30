@@ -46,10 +46,6 @@ export default {
     let luckydrawPsd = localStorage.getItem("luckydrawPsd");
     if (luckydrawName) self.form.name = luckydrawName;
     if (luckydrawPsd) self.form.psd = luckydrawPsd;
-    let node = document.getElementById("renderLoading");
-    if (!!node) {
-      node.parentNode.removeChild(node);
-    }
   },
   methods: {
     login() {
@@ -79,7 +75,7 @@ export default {
 
             self.$http.defaults.headers.common["Authorization"] =
               response.data.data.token;
-              // self.$store.dispatch("setInfo",response.data.data.token)
+              self.$store.dispatch("setLoginType");//设置登录状态，避免点刷新的时候本页面显示无信息
             self
               .$alert("未录数据?是否前往录入饭店数据？", "提示", {
                 closeOnClickModal:true,

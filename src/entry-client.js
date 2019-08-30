@@ -12,16 +12,21 @@ const {app,router,store}=createApp();
 // 全局混入beforeRouteEnter方法去查看是否取药预取
 Vue.mixin({
   beforeRouteEnter (to, from, next) {
-    console.log('beforeRouteEnter')
 	next((vm)=>{
-	    const { asyncGetData } = vm.$options
+		const { asyncGetData } = vm.$options
 	    if (asyncGetData) {
+			if(!vm.$store.state.userInfo.loginType)vm.$router.push("/");//全局判断loginType，如果无信息证明是点了刷新，则需要跳转到login中
 			asyncGetData(vm.$store, vm.$route).then(next).catch(next)
 	    } else {
 			next()
 	    }
 	})
-
+  },
+  mounted(){
+    let node = document.getElementById("renderLoading");
+    if (!!node) {
+      node.parentNode.removeChild(node);
+    }
   }
 })
 

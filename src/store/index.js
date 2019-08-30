@@ -7,12 +7,11 @@ const createStore = function () {
     let userInfo = {
         state: {
             userName: "lwf",
-            // tableData: []
+            loginType:false
         },
         mutations: {
-            setInfo(state, token) {
-                state.usertoken = token
-                axios.defaults.headers.common["Authorization"] = token;
+            setLoginType(state) {
+                state.loginType=true;
             },
             // getList(state) {
             //     //获取饭店列表
@@ -29,9 +28,8 @@ const createStore = function () {
             // }
         },
         actions: {
-            setInfo({ commit }, token) {
-                console.log('token是' + token)
-                commit("setInfo", token)
+            setLoginType({ commit }) {
+                commit("setLoginType")
             },
             // getList({ commit }) {
             //     commit("getList")

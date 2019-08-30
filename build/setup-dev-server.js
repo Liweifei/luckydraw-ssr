@@ -44,7 +44,7 @@ module.exports = function (server, cb) {
 
   //监听热更新=>设置在控制台输出日志
   const hotMiddlewarer = hotMiddleWare(clientCompiler, {
-    heartbeat: 5000
+    heartbeat: 5000//连接侦测的频率时间//向客户端发送心跳更新以保持连接活动的频率
   })
   server.use(hotMiddlewarer)
 

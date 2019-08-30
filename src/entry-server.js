@@ -29,14 +29,13 @@ export default context => {
         // 如果存在需要数据预取的fucntion则执行调用
         // console.log("预取匹配:")
         // console.log(c.asyncGetData);
-        
         return c.asyncGetData && c.asyncGetData(store,router);
       })).then(()=>{
         context.state=store.state;//数据预取传送到客户端进行同步;vue-ssr-server-render 会占用state给window.__INITIAL_STATE__
 
         resolve(app)
       }).catch(()=>{
-        reject
+        reject()
       })
     })
   })

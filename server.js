@@ -24,11 +24,14 @@ function createRender(bundle,manifest){//获取server-render的实例
   })
 }
 
+console.log("build env:"+process.env.NODE_ENV)
 let renderer;
 const isPro=process.env.NODE_ENV=="production";
 if(isPro){
+  console.log("pro")
   renderer=createRender(require("./dist/vue-ssr-server-bundle.json"),require("./dist/vue-ssr-client-manifest.json"))
 }else{
+  console.log("dev")
   require("./build/setup-dev-server")(server,(bundle,clientmanifest)=>{
     renderer=createRender(bundle,clientmanifest)
   })
@@ -53,7 +56,7 @@ server.get("*",(request,response)=>{
   })
 })
 
-const port=8086;
+const port=8087;
 porfinder.basePort=port;
 porfinder.getPort((err,port)=>{
   if(err)throw err;
