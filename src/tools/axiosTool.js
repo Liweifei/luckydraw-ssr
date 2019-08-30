@@ -2,7 +2,7 @@ import axios from 'axios';
 import createRoute from '../router'
 const router = createRoute();
 console.log("环境是-------------"+process.env.NODE_ENV)
-axios.defaults.baseURL = process.env.NODE_ENV=="production"?"http://localhost:3889":"http://localhost:3889"; // 配置axios请求的地址
+axios.defaults.baseURL = process.env.NODE_ENV=="production"?"http://liweifei.com:3889":"http://localhost:3889"; // 配置axios请求的地址
 axios.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
 axios.defaults.crossDomain = true;
 
